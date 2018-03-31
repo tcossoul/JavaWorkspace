@@ -1,0 +1,30 @@
+import processing.core.PApplet;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
+public class arraylist_experiment extends PApplet {
+	ArrayList<Dot> myList = new ArrayList<Dot>();
+	int numBalls = 3;
+	int speed = 5;
+	
+	public void setup() {
+		setup1();
+	}
+	
+	public void draw() {
+		for (int i=0; i<numBalls; i++) {
+			myList.get(i).moveLeft(speed);
+			myList.get(i).draw();			
+		}		
+	}
+	
+	public void setup1() {
+		size(800, 400);
+		for (int i=0; i<numBalls; i++) {
+			float x = (float)Math.random()*800;
+			float y = (float)Math.random()*400;
+			Dot dot = new Dot(this, x, y, speed);
+			myList.add(dot);
+		}
+	}
+}

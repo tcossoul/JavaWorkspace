@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="simulateOneStep" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="simulateonestep"/>
+			<item value="foodlevel"/>
+			<item value="rabbitnumeaten"/>
+			<item value="set_eaten"/>
+			<item value="ArrayList "/>
+			<item value="arrayList "/>
+			<item value="arrayList carrot"/>
+			<item value="draw"/>
+			<item value="rabbits"/>
+			<item value="rabbit"/>
+			<item value="fox"/>
+			<item value="FOODLEVEL"/>
+			<item value="public rabbit"/>
+			<item value="RABBIT_FOOD_VALUE"/>
+			<item value="private static final int RABBIT_FOOD_VALUE"/>
+		</list>
+		<list key="replacehistory">
+			<item value=""/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="336" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="454" key="DIALOG_HEIGHT"/>
+		<item value="985" key="DIALOG_X_ORIGIN"/>
+		<item value="214" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

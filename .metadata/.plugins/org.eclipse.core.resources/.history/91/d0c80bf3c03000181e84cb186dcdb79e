@@ -1,0 +1,28 @@
+import processing.core.PApplet;
+
+public class Game extends PApplet {
+	Cactus cactus;
+	int speed = 5;
+
+	public void setup() {
+		size(800, 400);
+		cactus = new Cactus(this, 400, 200);
+	}
+	
+	public void draw() {
+		background(200);
+		line(0, 200, 800, 200);
+
+		cactus.moveLeft( speed );
+		if ( cactus.isOffScreenToLeft() ) {
+			float nextPosition = 800 + (float)Math.random()*200;
+			System.out.println( nextPosition );
+			cactus.setPosition( nextPosition, cactus.getY() );
+		}
+		cactus.draw();
+	}
+	
+	public boolean areIntervalsTouching(float cs, float ce, float ts, float te, float ce1) {
+		return( !( te > cs || ts > ce1));
+	}
+}

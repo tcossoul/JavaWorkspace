@@ -1,0 +1,24 @@
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public class Cactus {
+	// Fields
+	int x, y;
+	PImage img;
+	PApplet gameWindow;
+
+	// Constructor
+	public Cactus(PApplet gw, int x, int y) {
+		this.gameWindow = gw;
+		this.x = x;
+		this.y = y;
+		img = gameWindow.loadImage("../assets/cactus1.png");
+
+	}
+
+	public void draw() {
+		gameWindow.image(img, 400, 200);
+
+	}
+
+}

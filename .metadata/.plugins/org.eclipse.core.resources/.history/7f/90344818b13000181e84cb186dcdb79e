@@ -1,0 +1,17 @@
+import processing.core.PApplet;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
+public class arraylist_experiment extends PApplet {
+	Dot dot;
+		
+	public void setup() {
+		size(800, 400);
+		dot = new Dot(this, 400, 200, 5);
+	}
+	
+	public void draw() {
+		rect( 10, 5, 50, 30 );
+		dot.draw(this);
+	}
+}

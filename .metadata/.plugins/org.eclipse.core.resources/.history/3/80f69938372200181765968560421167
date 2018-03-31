@@ -1,0 +1,33 @@
+import processing.core.PApplet;
+
+import processing.core.PImage;
+
+
+
+public class Game extends PApplet {
+
+	Cactus spiney;
+
+
+	public void setup() {
+
+		size(800, 400);
+
+	
+		spiney = new Cactus(this, 400, 200);
+	}
+	
+
+	public void draw() {
+		background(200);
+
+	
+		line(0, 200, 800, 200);
+		spiney.draw();
+
+	spiney.moveLeft(25);
+	}
+}
+
+
+

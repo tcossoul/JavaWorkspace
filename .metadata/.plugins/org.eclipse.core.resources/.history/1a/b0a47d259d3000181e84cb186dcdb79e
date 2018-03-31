@@ -1,0 +1,9 @@
+import processing.core.PApplet;
+
+public class Dot {
+	float x, y, speed;
+	PApplet gameWindow;
+
+	
+	
+}

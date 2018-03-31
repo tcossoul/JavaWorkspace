@@ -1,0 +1,40 @@
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public class TRex {
+	float x, y, width, height, ySpeed;
+	float gravity = 0.4f;
+	PImage img1;
+	PApplet gameWindow;
+	int animationFrame = 1;
+	int timer = 10;
+	
+	public TRex(PApplet gw, int x, int y) {
+		this.gameWindow = gw;
+		img1 = gameWindow.loadImage("../assets/t_rex_running1.png");
+		width = img1.width;
+		height = img1.height;
+		this.x = x;
+		this.y = y;
+		this.ySpeed = 0;
+	}
+	
+	public void displayX() {
+		System.out.println(this.x);
+	}
+	
+	public float getX() {
+		return this.x;
+	}
+	
+	public boolean isIntervalOverlapping(float start1, float end1, float start2, float end2) {
+		return !( end1 < start2 || start1 > end2 );
+	}
+
+	public boolean isCollidingWithCactus( Cactus cact ) {
+		boolean xOverlap = isIntervalOverlapping( x, x+width, cact.getX(), cact.getX()+cact.getWidth() );
+		boolean yOverlap = isIntervalOverlapping( y, y+height, cact.getY(), cact.getY()+cact.getHeight());
+
+		return xOverlap && yOverlap;
+	}
+}
