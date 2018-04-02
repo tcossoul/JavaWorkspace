@@ -37,7 +37,7 @@ public class Simulator {
 	// iteration.
 	private List<Rabbit> rabbits;
 	private List<Fox> foxes;
-	private ArrayList<carrot> carrots;
+	private ArrayList<Carrot> carrots;
 
 	// The current state of the field.
 	private Field field;
@@ -88,7 +88,7 @@ public class Simulator {
 		field = new Field(width, height);
 		updatedField = new Field(width, height);
 		stats = new FieldStats();
-		carrots = new ArrayList<carrot>();
+		carrots = new ArrayList<Carrot>();
 
 		// Setup a valid starting point.
 		reset();
@@ -102,7 +102,7 @@ public class Simulator {
 		view = new FieldDisplay(p, this.field, x, y, display_width, display_height);
 		view.setColor(Rabbit.class, p.color(155, 155, 155));
 		view.setColor(Fox.class, p.color(200, 0, 255));
-		view.setColor(carrot.class, p.color(255,165,0));
+		view.setColor(Carrot.class, p.color(255,165,0));
 		graph = new Graph(p, 100, p.height - 30, p.width - 50, p.height - 110, 0,
 				0, 500, field.getHeight() * field.getWidth());
 		graph.title = "Fox and Rabbit Populations";
@@ -110,7 +110,7 @@ public class Simulator {
 		graph.ylabel = "Pop.\t\t";
 		graph.setColor(Rabbit.class, p.color(155, 155, 155));
 		graph.setColor(Fox.class, p.color(200, 0, 255));
-		graph.setColor(carrot.class, p.color(200,165,0));
+		graph.setColor(Carrot.class, p.color(200,165,0));
 	}
 
 	public void setGUI(PApplet p) {
@@ -123,7 +123,7 @@ public class Simulator {
 	 */
 	public void runLongSimulation() {
 		simulate(500);
-		System.out.println(numeaten);
+//		System.out.println(numeaten);
 	}
 
 	/**
@@ -148,7 +148,7 @@ public class Simulator {
 
 		// New List to hold newborn rabbits.
 		List<Rabbit> newRabbits = new ArrayList<Rabbit>();
-		List<carrot> newcarrots = new ArrayList<carrot>();
+		List<Carrot> newcarrots = new ArrayList<Carrot>();
 
 		// Loop through all Rabbits. Let each run around.
 		for (int i = 0; i < rabbits.size(); i++) {
@@ -158,12 +158,12 @@ public class Simulator {
 				rabbits.remove(i);
 				i--;
 			}
-			Rabbit carrot = carrot.get(i);
-			carrot.run(updatedField, newcarrots);
-			if (!rabbit.isAlive()) {
-				carrots.remove(i);
-				i--;
-			}
+//			Carrot carrot = Carrot.get(i);
+//			carrot.run(updatedField, newcarrots);
+//			if (!rabbit.isAlive()) {
+//				carrots.remove(i);
+//				i--;
+//			}
 		}
 
 		// Add new born rabbits to the main list of rabbits.
@@ -186,14 +186,13 @@ public class Simulator {
 		foxes.addAll(newFoxes);
 		
 		for (int i=0;i<carrots.size();i++) {
-			carrot carrot = carrots.get(i);simulate 
+			Carrot carrot = carrots.get(i); // simulate 
 			if(!carrot.isAlive()) {
-				carrot.remove(i);
+//				carrot.remove(i);
 				i--;
 			}
 		}
 			
-		}
 
 		// Swap the field and updatedField at the end of the step.
 		Field temp = field;

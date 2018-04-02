@@ -1,0 +1,7 @@
+/.metadata/
+/.recommenders/
+*.class
+*.jar
+*.zip
+*.xml
+*.snap

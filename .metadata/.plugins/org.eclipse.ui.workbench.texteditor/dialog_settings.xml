@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="simulateOneStep" key="selection"/>
+		<item value="eaten" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="eaten"/>
 			<item value="simulateonestep"/>
 			<item value="foodlevel"/>
 			<item value="rabbitnumeaten"/>
@@ -22,7 +23,6 @@
 			<item value="FOODLEVEL"/>
 			<item value="public rabbit"/>
 			<item value="RABBIT_FOOD_VALUE"/>
-			<item value="private static final int RABBIT_FOOD_VALUE"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

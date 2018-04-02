@@ -10,7 +10,7 @@ import java.util.Random;
  * @version 2006.03.30
  */
 public class Rabbit implements Serializable {
-	private static private int BREEDING_AGE = 5;
+	private static final int BREEDING_AGE = 5;
 	public int rabbitnumeaten = 0;
 
 	// The age to which a rabbit can live.
@@ -50,15 +50,15 @@ public class Rabbit implements Serializable {
 		alive = true;
 		if (randomAge) {
 			age = rand.nextInt(MAX_AGE);
-			foodlevel=CARROT_FOOD_VALUE;
+			foodlevel = CARROT_FOOD_VALUE;
 		}
 	}
 
 	private Location findFood(Field field, Location location) {
-		List<Location> adjacentLocations = field.adjacentLocations(location);
+		List<Location> adjacentLocations = field.adjacentLocations( location );
 
 		for (Location where : adjacentLocations) {
-			Object animal = field.getObjectAt(where);
+			Object animal = field.getObjectAt( where );
 			if (animal instanceof carrot) {
 				carrot carrot = (carrot) animal;
 				if (carrot.isAlive()) {
