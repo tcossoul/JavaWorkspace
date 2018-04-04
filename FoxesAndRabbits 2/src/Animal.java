@@ -11,29 +11,31 @@ import java.util.Random;
  */
 public class Animal implements Serializable {
 	// Characteristics shared by all Animals (static fields).
-	private int BREEDING_AGE;
+	protected int breeding_age;
 	// The age to which a animal can live.
-	private int MAX_AGE;
+	protected int max_age;
 	// The likelihood of a animal breeding.
-	private double BREEDING_PROBABILITY;
+	protected double breeding_probability;
 	// The maximum number of births.
-	private int MAX_LITTER_SIZE;
-	// The food value of a single rabbit. In effect, this is the
-	// number of steps a animal can go before it has to eat again.
-	private int RABBIT_FOOD_VALUE;
+	protected int max_litter_size;
+	// The food value of this animal when eaten
+	protected int food_value;
+	
 	// A shared random number generator to control breeding.
 	private static final Random rand = new Random();
 
 	// Individual characteristics (instance fields).
 
 	// The animal's age.
-	private int age;
+	protected int age;
 	// Whether the animal is alive or not.
-	private boolean alive;
+	protected boolean alive;
 	// The animal's position
-	private Location location;
+	protected Location location;
 	// The animal's food level, which is increased by eating rabbits.
-	private int foodLevel;
+	protected int foodLevel;
+	// New born food level
+	private int foodLevelNewBorn = 6;
 
 	/**
 	 * Create a animal. A animal can be created as a new born (age zero and not
@@ -42,65 +44,31 @@ public class Animal implements Serializable {
 	 * @param randomAge
 	 *            If true, the animal will have random age and hunger level.
 	 */
-	public Animal(boolean randomAge) {
+	public Animal(boolean randomAge, int BREEDING_AGE, int MAX_AGE, double BREEDING_PROBABILITY, int MAX_LITTER_SIZE, int FOOD_VALUE ) {
 		age = 0;
 		alive = true;
+		breeding_age = BREEDING_AGE;
+		max_age = MAX_AGE;
+		breeding_probability = BREEDING_PROBABILITY;
+		max_litter_size = MAX_LITTER_SIZE;
+		food_value = FOOD_VALUE;
+
+		// Assume all new animals are born w/ a food level equal to the food level of a rabbit
 		if (randomAge) {
 			age = rand.nextInt(MAX_AGE);
-			foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
+			foodLevel = rand.nextInt( foodLevelNewBorn );
 		} else {
 			// leave age at 0
-			foodLevel = RABBIT_FOOD_VALUE;
-		}
-	}
-
-	/**
-	 * This is what the animal does most of the time: it hunts for rabbits. In the
-	 * process, it might breed, die of hunger, or die of old age.
-	 * 
-	 * @param currentField
-	 *            The field currently occupied.
-	 * @param updatedField
-	 *            The field to transfer to.
-	 * @param newAnimals
-	 *            A list to add newly born Animals to.
-	 */
-	public void hunt(Field currentField, Field updatedField, List<Animal> newAnimals) {
-		incrementAge();
-		incrementHunger();
-		if (alive) {
-			// New Animals are born into adjacent locations.
-			int births = breed();
-			for (int b = 0; b < births; b++) {
-				Animal newAnimal = new Animal(false);
-				newAnimal.setFoodLevel(this.foodLevel);
-				newAnimals.add(newAnimal);
-				Location loc = updatedField.randomAdjacentLocation(location);
-				newAnimal.setLocation(loc);
-				updatedField.put(newAnimal, loc);
-			}
-			// Move towards the source of food if found.
-			Location newLocation = findFood(currentField, location);
-			if (newLocation == null) { // no food found - move randomly
-				newLocation = updatedField.freeAdjacentLocation(location);
-			}
-			if (newLocation != null) {
-				setLocation(newLocation);
-				updatedField.put(this, newLocation);
-			} else {
-				// can neither move nor stay - overcrowding - all locations
-				// taken
-				alive = false;
-			}
+			foodLevel = foodLevelNewBorn;
 		}
 	}
 
 	/**
 	 * Increase the age. This could result in the animal's death.
 	 */
-	private void incrementAge() {
+	protected void incrementAge() {
 		age++;
-		if (age > MAX_AGE) {
+		if (age > max_age) {
 			alive = false;
 		}
 	}
@@ -108,50 +76,23 @@ public class Animal implements Serializable {
 	/**
 	 * Make this animal more hungry. This could result in the animal's death.
 	 */
-	private void incrementHunger() {
+	protected void incrementHunger() {
 		foodLevel--;
 		if (foodLevel <= 0) {
 			alive = false;
 		}
 	}
 
-	/**
-	 * Tell the animal to look for rabbits adjacent to its current location. Only
-	 * the first live rabbit is eaten.
-	 * 
-	 * @param field
-	 *            The field in which it must look.
-	 * @param location
-	 *            Where in the field it is located.
-	 * @return Where food was found, or null if it wasn't.
-	 */
-	private Location findFood(Field field, Location location) {
-		List<Location> adjacentLocations = field.adjacentLocations(location);
-
-		for (Location where : adjacentLocations) {
-			Object animal = field.getObjectAt(where);
-			if (animal instanceof Rabbit) {
-				Rabbit rabbit = (Rabbit) animal;
-				if (rabbit.isAlive()) {
-					rabbit.setEaten();
-					foodLevel = RABBIT_FOOD_VALUE;
-					return where;
-				}
-			}
-		}
-
-		return null;
-	}
 
 	/**
 	 * Generate a number representing the number of births, if it can breed.
 	 * 
 	 * @return The number of births (may be zero).
 	 */
-	private int breed() {
+	protected int breed() {
 		int births = 0;
-		if (canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-			births = rand.nextInt(MAX_LITTER_SIZE) + 1;
+		if (canBreed() && rand.nextDouble() <= breeding_probability) {
+			births = rand.nextInt(max_litter_size) + 1;
 		}
 		return births;
 	}
@@ -160,7 +101,7 @@ public class Animal implements Serializable {
 	 * A animal can breed if it has reached the breeding age.
 	 */
 	private boolean canBreed() {
-		return age >= BREEDING_AGE;
+		return age >= breeding_age;
 	}
 
 	/**
@@ -204,5 +145,9 @@ public class Animal implements Serializable {
 
 	public void setFoodLevel(int fl) {
 		this.foodLevel = fl;
+	}
+	
+	public int getFoodValue() {
+		return food_value;
 	}
 }

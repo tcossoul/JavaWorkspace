@@ -34,7 +34,7 @@ public class Simulator {
 	private static final double RABBIT_CREATION_PROBABILITY = 0.08;
 
 	// The probability that a bear will be created in any given grid position.
-	private static final double BEAR_CREATION_PROBABILITY = 0.005;
+	private static final double BEAR_CREATION_PROBABILITY = 0.002;
 	
 	// Lists of animals in the field. Separate lists are kept for ease of
 	// iteration.
@@ -161,7 +161,6 @@ public class Simulator {
 				i--;
 			}
 		}
-
 		// Add new born rabbits to the main list of rabbits.
 		rabbits.addAll(newRabbits);
 
@@ -177,13 +176,11 @@ public class Simulator {
 				i--;
 			}
 		}
-
 		// Add new born foxes to the main list of foxes.
 		foxes.addAll(newFoxes);
 
-		// Create new list for newborn foxes.
+		// Create new list for newborn bears.
 		List<Bear> newBears = new ArrayList<Bear>();
-
 		// Loop through Foxes; let each run around.
 		for (int i = 0; i < bears.size(); i++) {
 			Bear bear = bears.get(i);
@@ -193,7 +190,6 @@ public class Simulator {
 				i--;
 			}
 		}
-
 		// Add new born foxes to the main list of foxes.
 		bears.addAll(newBears);
 		
