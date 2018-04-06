@@ -12,7 +12,7 @@ public class Fox extends Animal {
 	}
 	
 	// Only carnivor animals hunt (herbivors run)
-	public void hunt(Field currentField, Field updatedField, List<Fox> newFoxes) {
+	public void act(Field field, Field currentField, Field updatedField, List<Fox> newFoxes) {
 		incrementAge();
 		incrementHunger();
 		if (alive) {

@@ -14,7 +14,7 @@ public class Bear extends Animal {
 	}
 	
 	// Only carnivor animals hunt (herbivors run)
-	public void hunt(Field currentField, Field updatedField, List<Bear> newBears) {
+	public void act(Field field, Field currentField, Field updatedField, List<Bear> newBears) {
 		incrementAge();
 		incrementHunger();
 		if (alive) {

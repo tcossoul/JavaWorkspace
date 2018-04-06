@@ -55,7 +55,7 @@ public class Animal implements Serializable {
 
 		// Assume all new animals are born w/ a food level equal to the food level of a rabbit
 		if (randomAge) {
-			age = rand.nextInt(MAX_AGE);
+			age = rand.nextInt(max_age);
 			foodLevel = rand.nextInt( foodLevelNewBorn );
 		} else {
 			// leave age at 0

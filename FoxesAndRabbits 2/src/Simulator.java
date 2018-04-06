@@ -34,13 +34,10 @@ public class Simulator {
 	private static final double RABBIT_CREATION_PROBABILITY = 0.08;
 
 	// The probability that a bear will be created in any given grid position.
-	private static final double BEAR_CREATION_PROBABILITY = 0.002;
+	private static final double BEAR_CREATION_PROBABILITY = 0.005;
 	
-	// Lists of animals in the field. Separate lists are kept for ease of
-	// iteration.
-	private List<Rabbit> rabbits;
-	private List<Fox> foxes;
-	private List<Bear> bears;
+	// Lists of animals in the field. Separate lists are kept for ease of iteration.
+	private List<Animal> animals;
 
 	// The current state of the field.
 	private Field field;
@@ -85,10 +82,7 @@ public class Simulator {
 			height = DEFAULT_HEIGHT;
 			width = DEFAULT_WIDTH;
 		}
-
-		rabbits = new ArrayList<Rabbit>();
-		foxes = new ArrayList<Fox>();
-		bears = new ArrayList<Bear>();
+		List animals = new ArrayList<Animal>();
 		field = new Field(width, height);
 		updatedField = new Field(width, height);
 		stats = new FieldStats();
@@ -150,48 +144,20 @@ public class Simulator {
 		step++;
 
 		// New List to hold newborn rabbits.
-		List<Rabbit> newRabbits = new ArrayList<Rabbit>();
+		List<Animal> newAnimals = new ArrayList<Animal>();
 
 		// Loop through all Rabbits. Let each run around.
-		for (int i = 0; i < rabbits.size(); i++) {
-			Rabbit rabbit = rabbits.get(i);
-			rabbit.run(updatedField, newRabbits);
-			if (!rabbit.isAlive()) {
-				rabbits.remove(i);
+		for (int i = 0; i < animals.size(); i++) {
+			Animal animal = animals.get(i);
+			animal.act(field, updatedField, newAnimals);
+			if (!animal.isAlive()) {
+				animals.remove(i);
 				i--;
 			}
 		}
 		// Add new born rabbits to the main list of rabbits.
-		rabbits.addAll(newRabbits);
+		animals.addAll(newAnimals);
 
-		// Create new list for newborn foxes.
-		List<Fox> newFoxes = new ArrayList<Fox>();
-
-		// Loop through Foxes; let each run around.
-		for (int i = 0; i < foxes.size(); i++) {
-			Fox fox = foxes.get(i);
-			fox.hunt(field, updatedField, newFoxes);
-			if (!fox.isAlive()) {
-				foxes.remove(i);
-				i--;
-			}
-		}
-		// Add new born foxes to the main list of foxes.
-		foxes.addAll(newFoxes);
-
-		// Create new list for newborn bears.
-		List<Bear> newBears = new ArrayList<Bear>();
-		// Loop through Foxes; let each run around.
-		for (int i = 0; i < bears.size(); i++) {
-			Bear bear = bears.get(i);
-			bear.hunt(field, updatedField, newBears);
-			if (!bear.isAlive()) {
-				bears.remove(i);
-				i--;
-			}
-		}
-		// Add new born foxes to the main list of foxes.
-		bears.addAll(newBears);
 		
 		// Swap the field and updatedField at the end of the step.
 		Field temp = field;

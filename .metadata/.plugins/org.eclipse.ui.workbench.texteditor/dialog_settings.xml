@@ -2,27 +2,27 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="animal" key="selection"/>
+		<item value="ArrayList" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="ArrayList"/>
+			<item value="findFood"/>
+			<item value="why"/>
+			<item value="bear"/>
+			<item value="o"/>
+			<item value="findfood"/>
+			<item value="breed"/>
+			<item value="hunt"/>
+			<item value="rand"/>
 			<item value="Fox"/>
 			<item value="fox"/>
 			<item value="foxes"/>
 			<item value="Foxes"/>
 			<item value="run"/>
 			<item value="isalive"/>
-			<item value="seteaten"/>
-			<item value="stop"/>
-			<item value="step"/>
-			<item value="key"/>
-			<item value="&quot;p&quot;"/>
-			<item value="&apos;p&apos;"/>
-			<item value="pause"/>
-			<item value="foodlevel"/>
-			<item value="carrot"/>
 		</list>
 		<list key="replacehistory">
 			<item value="Animal"/>
