@@ -12,19 +12,19 @@ public class Fox extends Animal {
 	}
 	
 	// Only carnivor animals hunt (herbivors run)
-	public void act(Field field, Field currentField, Field updatedField, List<Fox> newFoxes) {
+	public void act(Field currentField, Field updatedField, List<Animal> newAnimals) {
 		incrementAge();
 		incrementHunger();
 		if (alive) {
 			// New Animals are born into adjacent locations.
 			int births = breed();
 			for (int b = 0; b < births; b++) {
-				Fox newFox = new Fox( false );
-				newFox.setFoodLevel( this.foodLevel );
-				newFoxes.add( newFox );
+				Animal newAnimal = new Fox( false );
+				newAnimal.setFoodLevel( this.foodLevel );
+				newAnimals.add( newAnimal );
 				Location loc = updatedField.randomAdjacentLocation( location );
-				newFox.setLocation( loc );
-				updatedField.put( newFox, loc);
+				newAnimal.setLocation( loc );
+				updatedField.put( newAnimal, loc);
 			}
 			// Move towards the source of food if found.
 			Location newLocation = findFood(currentField, location);

@@ -12,17 +12,17 @@ public class Rabbit extends Animal {
 	}
 	
 	// Only carnivor animals hunt (herbivors run)
-    public void act(Field field, Field updatedField, List<Rabbit> newRabbits)
+    public void act(Field currentField, Field updatedField, List<Animal> newAnimals)
     {
         incrementAge();
         if(alive) {
             int births = breed();
             for(int b = 0; b < births; b++) {
-                Rabbit newRabbit = new Rabbit( false );
-                newRabbits.add(newRabbit);
+                Animal newAnimal = new Rabbit( false );
+                newAnimals.add( newAnimal);
                 Location loc = updatedField.randomAdjacentLocation(location);
-                newRabbit.setLocation(loc);
-                updatedField.put(newRabbit, loc);
+                newAnimal.setLocation(loc);
+                updatedField.put(newAnimal, loc);
             }
             Location newLocation = updatedField.freeAdjacentLocation(location);
             // Only transfer to the updated field if there was a free location

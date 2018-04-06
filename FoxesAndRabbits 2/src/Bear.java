@@ -14,19 +14,19 @@ public class Bear extends Animal {
 	}
 	
 	// Only carnivor animals hunt (herbivors run)
-	public void act(Field field, Field currentField, Field updatedField, List<Bear> newBears) {
+	public void act(Field currentField, Field updatedField, List<Animal> newAnimals) {
 		incrementAge();
 		incrementHunger();
 		if (alive) {
 			// New Animals are born into adjacent locations.
 			int births = breed();
 			for (int b = 0; b < births; b++) {
-				Bear newBear = new Bear( false );
-				newBear.setFoodLevel( this.foodLevel );
-				newBears.add( newBear );
+				Animal newAnimal = new Bear( false );
+				newAnimal.setFoodLevel( this.foodLevel );
+				newAnimals.add( newAnimal );
 				Location loc = updatedField.randomAdjacentLocation( location );
-				newBear.setLocation( loc );
-				updatedField.put( newBear, loc);
+				newAnimal.setLocation( loc );
+				updatedField.put( newAnimal, loc);
 			}
 			// Move towards the source of food if found.
 			Location newLocation = findFood(currentField, location);
@@ -37,8 +37,7 @@ public class Bear extends Animal {
 				setLocation(newLocation);
 				updatedField.put(this, newLocation);
 			} else {
-				// can neither move nor stay - overcrowding - all locations
-				// taken
+				// can neither move nor stay - overcrowding - all locations taken
 				alive = false;
 			}
 		}

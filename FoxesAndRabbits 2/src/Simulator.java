@@ -27,14 +27,10 @@ public class Simulator {
 	// The default height of the grid.
 	private static final int DEFAULT_HEIGHT = 80;
 
-	// The probability that a fox will be created in any given grid position.
-	private static final double FOX_CREATION_PROBABILITY = 0.02;
-
-	// The probability that a rabbit will be created in any given grid position.
+	// The probability that an animal will be created in any given grid position.
+	private static final double FOX_CREATION_PROBABILITY    = 0.02;
 	private static final double RABBIT_CREATION_PROBABILITY = 0.08;
-
-	// The probability that a bear will be created in any given grid position.
-	private static final double BEAR_CREATION_PROBABILITY = 0.005;
+	private static final double BEAR_CREATION_PROBABILITY   = 0.005;
 	
 	// Lists of animals in the field. Separate lists are kept for ease of iteration.
 	private List<Animal> animals;
@@ -82,7 +78,7 @@ public class Simulator {
 			height = DEFAULT_HEIGHT;
 			width = DEFAULT_WIDTH;
 		}
-		List animals = new ArrayList<Animal>();
+		animals = new ArrayList<Animal>();
 		field = new Field(width, height);
 		updatedField = new Field(width, height);
 		stats = new FieldStats();
@@ -181,9 +177,7 @@ public class Simulator {
 	 */
 	public void reset() {
 		step = 0;
-		rabbits.clear();
-		foxes.clear();
-		bears.clear();
+		animals.clear();
 		field.clear();
 		updatedField.clear();
 		initializeBoard(field);
@@ -209,25 +203,23 @@ public class Simulator {
 				if (rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
 					Fox fox = new Fox(true);
 					fox.setLocation(col, row);
-					foxes.add(fox);
+					animals.add(fox);
 					field.put(fox, col, row);
 				} else if (rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
 					Rabbit rabbit = new Rabbit(true);
 					rabbit.setLocation(col, row);
-					rabbits.add(rabbit);
+					animals.add(rabbit);
 					field.put(rabbit, col, row);
 				} else if (rand.nextDouble() <= BEAR_CREATION_PROBABILITY) {
 					Bear bear = new Bear(true);
 					bear.setLocation(col, row);
-					bears.add(bear);
+					animals.add(bear);
 					field.put(bear, col, row);
 				}
 
 			}
 		}
-		Collections.shuffle(rabbits);
-		Collections.shuffle(foxes);
-		Collections.shuffle(bears);
+		Collections.shuffle(animals);
 	}
 
 	private boolean isViable() {
@@ -251,7 +243,7 @@ public class Simulator {
 
 	public void writeToFile(String writefile) {
 		try {
-			Record r = new Record(rabbits, foxes, bears, this.field, this.step);
+			Record r = new Record(animals, this.field, this.step);
 			FileOutputStream outStream = new FileOutputStream(writefile);
 			ObjectOutputStream objectOutputFile = new ObjectOutputStream(outStream);
 			objectOutputFile.writeObject(r);
@@ -266,9 +258,7 @@ public class Simulator {
 			FileInputStream inputStream = new FileInputStream(readfile);
 			ObjectInputStream objectInputFile = new ObjectInputStream(inputStream);
 			Record r = (Record) objectInputFile.readObject();
-			setFoxes(r.getFoxes());
-			setRabbits(r.getRabbits());
-			setBears(r.getBears());
+			setAnimals(r.getAnimals());
 			setField(r.getField());
 			setStep(r.getSteps());
 			objectInputFile.close();
@@ -286,16 +276,8 @@ public class Simulator {
 		field = field2;
 	}
 
-	private void setRabbits(List<Rabbit> rabbits2) {
-		rabbits = rabbits2;
-	}
-
-	private void setFoxes(List<Fox> foxes2) {
-		foxes = foxes2;
-	}
-
-	private void setBears(List<Bear> bears2) {
-		bears = bears2;
+	private void setAnimals(List<Animal> animals2) {
+		animals = animals2;
 	}
 
 	// Perform an action when the mouse was clicked.
@@ -311,12 +293,7 @@ public class Simulator {
 				Location locToCheck = new Location(x, y);
 				if (field.isInGrid(locToCheck)) {
 					Object animal = field.getObjectAt(locToCheck);
-					if (animal instanceof Rabbit)
-						rabbits.remove((Rabbit) animal);
-					if (animal instanceof Fox)
-						foxes.remove((Fox) animal);
-					if (animal instanceof Bear)
-						foxes.remove((Bear) animal);
+					animals.remove(animal);
 					field.put(null, locToCheck);
 					updatedField.put(null, locToCheck);
 				}

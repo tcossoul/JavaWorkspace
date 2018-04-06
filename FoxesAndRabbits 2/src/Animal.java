@@ -63,6 +63,11 @@ public class Animal implements Serializable {
 		}
 	}
 
+	public void act(Field currentField, Field updatedField, List<Animal> newAnimals) {
+		// Left blank on purpose
+	}
+	
+	
 	/**
 	 * Increase the age. This could result in the animal's death.
 	 */

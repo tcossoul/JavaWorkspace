@@ -8,39 +8,21 @@ import java.util.List;
 
 
 public class Record implements Serializable{
-    private List<Rabbit> rabbits;
-    private List<Fox> foxes;
-    private List<Bear> bears;
-
+    private List<Animal> animals;
     private int steps;
-    
     // The current state of the field.
     private Field field;
     
-	public Record(List<Rabbit> r, List<Fox> f, List<Bear> b, Field field, int step){
-		setRabbits(r);
-		setFoxes(f);
-		setBears(b);
+	public Record(List<Animal> a, Field field, int step){
+		setAnimals(a);
 		setField(field);
 		setSteps(step);
 	}
-	public List<Rabbit> getRabbits() {
-		return rabbits;
+	public List<Animal> getAnimals() {
+		return animals;
 	}
-	public void setRabbits(List<Rabbit> rabbits) {
-		this.rabbits = rabbits;
-	}
-	public List<Fox> getFoxes() {
-		return foxes;
-	}
-	public void setFoxes(List<Fox> foxes) {
-		this.foxes = foxes;
-	}
-	public List<Bear> getBears() {
-		return bears;
-	}
-	public void setBears(List<Bear> bears) {
-		this.bears = bears;
+	public void setAnimals(List<Animal> animals) {
+		this.animals = animals;
 	}
 	public Field getField() {
 		return field;
